@@ -1,19 +1,19 @@
-# [AUDRE-Project-Management-App]
+#AUDRE-Project-Management-App
 This was my course project for CIS170C, Programming with Lab.
 
-##**For my case, I chose:
+##For my case, I chose:
 
 Electrical Calculator: You will develop a program for an electrical contractor that will allow it to create bids for jobs. The program will be able to solve Ohm's law for any variable (I later dropped this feature as it no longer seemed relevant). In addition, the program will be able to compute the cost of the materials and labor for a job. Either aluminum or copper wire may be used, and the user can enter the cost per feet of each gauge of wire of a particular type. Additional costs for labor based on length of wire can be entered. The program should produce a report showing total cost for labor and material. Job data should be able to be saved and retrieved from a file or files.
 
 Description of Project from Professor:
 
-##**Objectives
+##Objectives
 
 The objective of the Course Project is to give you practice applying the programming techniques to a complete development project.
 
 The actual programming problem is not too difficult, but in order to be successful with the Course Project, you will need to be able to apply the programming techniques and accomplish the analysis and design of the problem as well. This implies that you need to understand the weekly concepts as well as the programming techniques so you can apply both to the software development project.
 
-##**Guidelines
+##Guidelines
 
 Your final project must include all of the following. Your initial submission will start simple, and you will add features each week.
 
@@ -33,7 +33,7 @@ Each week, you will submit the following.
     - MS Visual Studio Project folder
     - Completed Test Plan (Screen shots of working program)
 
-##**Weekly Breakdown
+##Weekly Breakdown
 
 Week 1: Decide on your project program, and write a brief description of what the program will do. Prepare an IPO chart for your program. Create two or three sample screens (using Word or a drawing program) depicting what your program will look like to the user (remember that these will be console-based programs).
 
