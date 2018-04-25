@@ -1,35 +1,76 @@
 // ---------------------------------------------------------------
 // Programming Assignment:	COURSE PROJECT
 // Developer:				Domingo Gonzales III
-// Date Written:			3/11/18
-// Purpose:					WEEK 3 
+// Date Written:			3/25/18
+// Purpose:					WEEK 4 
 // ---------------------------------------------------------------
 
 #include <iostream>
 #include <string>
 using namespace std;
 
+//function prototypes
+void addJob(int);
+void updateJob(int);
+void deleteJob(int);
+void summaryReport(int);
+
+// variable declarations
+char userChoice = ' ', wireType;
+string typeOfWire;
+int refNum, feetOfWire;
+double costPerFoot, costOfLabor, totalCostOfMaterial, totalCostOfLabor;
+
 int main() {
 
-	// variable declarations
-	char importOrManual, wireType;
-	string typeOfWire;
-	int feetOfWire;
-	double costPerFoot, costOfLabor, totalCostOfMaterial, totalCostOfLabor;
+	while (userChoice != 'E' && userChoice != 'e') {
+		
+		// Menu
+		cout << "What would you like to do:\n"
+			<< "(A) Add a job\n"
+			<< "(U) Update a job\n"
+			<< "(D) Delete a job\n"
+			<< "(R) Display a Job Summary Report\n"
+			<< "(E) Exit the program\n";
+		cin >> userChoice;
 
-	// determining how program will get its info
-	cout << "Would you like to import(i) or manually enter(m) your quote information?";
-	cin >> importOrManual;
+		// verifying user's choice
+		while (userChoice != 'A' && userChoice != 'a' && userChoice != 'U' && userChoice != 'u' && userChoice != 'D' && userChoice != 'd' && userChoice != 'R' && userChoice != 'r' && userChoice != 'E' && userChoice != 'e') {
+			cout << "Please select a valid menu item. ";
+			cin >> userChoice;
+		}
 
-	// verifying users input source choice
-	while (importOrManual != 'i' && importOrManual != 'm') {
-		cout << "Please enter an 'i' for import or 'm' for manual entry.";
-		cin >> importOrManual;
+		if (userChoice == 'A' || userChoice == 'a') {
+			cout << "Enter the reference number for the new job you would like to add: ";
+			cin >> refNum;
+			addJob(refNum);
+		}
+		else if (userChoice == 'U' || userChoice == 'u') {
+			cout << "Enter the reference number for the job you wish to update: ";
+			cin >> refNum;
+			updateJob(refNum);
+		}
+		else if (userChoice == 'D' || userChoice == 'd') {
+			cout << "Enter the reference number for the job you would like to delete: ";
+			cin >> refNum;
+			deleteJob(refNum);
+		}
+		else if (userChoice == 'R' || userChoice == 'r') {
+			cout << "Enter the reference number for the job you would like to create a summary report for: ";
+			cin >> refNum;
+			summaryReport(refNum);
+		}
+		else {
+			cout << "Thanks for using the Project Management App!\n";
+		}
+
 	}
+}
 
-	// if statement for import or manual entry will be build here later
+void addJob(int refNum) {
+	//Code to create file named refNum will go here
 
-	cout << "What type of wire will the project require?\n(a for aluminum/c for copper)";
+	cout << "What type of wire will the project require?\n(a for aluminum/c for copper) ";
 	cin >> wireType;
 
 	if (wireType == 'a') {
@@ -39,21 +80,62 @@ int main() {
 		typeOfWire = "copper";
 	}
 
-	cout << "How many feet of wire will the project need?";
+	cout << "How many feet of wire will the project need? ";
 	cin >> feetOfWire;
 
-	cout << "What is the current cost per foot of " << typeOfWire << " wire?";
+	cout << "What is the current cost per foot of " << typeOfWire << " wire? $";
 	cin >> costPerFoot;
 
-	cout << "What is the labor rate per foot of wire?";
+	cout << "What is the labor rate per foot of wire? $";
 	cin >> costOfLabor;
 
 	totalCostOfMaterial = feetOfWire * costPerFoot;
 	totalCostOfLabor = feetOfWire * costOfLabor;
 
-	cout << "\nProject Report:\n\n"
-		<< "You will use " << feetOfWire << " feet of " << typeOfWire << " wire.\n\n"
-		<< "At a cost of $" << costPerFoot << " per foot, the total cost of materials will be $" << totalCostOfMaterial << ".\n"
-		<< "At a rate of $" << costOfLabor << " per foot, the total cost of labor will be $" << totalCostOfLabor << ".\n";
+	//code to save entered information will go here later
 
+	cout << "Your new job " << refNum << " has been saved to file.\n\n";
+}
+
+void updateJob(int refNum) {
+
+	cout << "What type of wire will the project require?\n(a for aluminum/c for copper) ";
+	cin >> wireType;
+
+	if (wireType == 'a') {
+		typeOfWire = "aluminum";
+	}
+	else {
+		typeOfWire = "copper";
+	}
+
+	cout << "How many feet of wire will the project need? ";
+	cin >> feetOfWire;
+
+	cout << "What is the current cost per foot of " << typeOfWire << " wire? ";
+	cin >> costPerFoot;
+
+	cout << "What is the labor rate per foot of wire? ";
+	cin >> costOfLabor;
+
+	totalCostOfMaterial = feetOfWire * costPerFoot;
+	totalCostOfLabor = feetOfWire * costOfLabor;
+
+	//code to save entered information overwriting existing data will go here
+	cout << "Your updates to job " << refNum << " has been saved to file.\n\n";
+}
+
+void deleteJob(int refNum) {
+	//code to delete file will go here later
+	cout << "Job " << refNum << " has been sucessfully deleted.\n\n";
+}
+
+void summaryReport(int refNum) {
+	//code to extract this information from file will go here so I've entered dummy numbers
+
+	cout << "\nProject Report:\n\n"
+		<< "You will use " << 100 << " feet of " << "aluminum" << " wire.\n\n"
+		<< "At a cost of $" << 4.00 << " per foot, the total cost of materials will be $" << 400 << ".\n"
+		<< "At a rate of $" << 8.00 << " per foot, the total cost of labor will be $" << 800 << ".\n"
+		<< "This brings the total project cost to $" << 1200 << ".\n\n";
 }
