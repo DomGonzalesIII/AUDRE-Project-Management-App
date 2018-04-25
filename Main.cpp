@@ -2,7 +2,7 @@
 // Programming Assignment:	COURSE PROJECT
 // Developer:				Domingo Gonzales III
 // Date Written:			3/11/18
-// Purpose:					WEEK 2 
+// Purpose:					WEEK 3 
 // ---------------------------------------------------------------
 
 #include <iostream>
