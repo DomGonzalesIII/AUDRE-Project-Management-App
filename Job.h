@@ -31,4 +31,3 @@ public:
 	double getLaborCost();
 	void summaryReport();
 };
-
