@@ -46,7 +46,7 @@ char Job::getWireType() {
 	cout << "\nWhat type of wire will the project require?\n(a for aluminum/c for copper) ";
 	cin >> wireType;
 
-	// verifying user's choice
+	// verifying user's choice 
 	while (tolower(wireType) != 'a' && tolower(wireType) != 'c') {
 		cout << "\nPlease select a valid wire type.\n(a for aluminum/c for copper) ";
 		cin >> wireType;
