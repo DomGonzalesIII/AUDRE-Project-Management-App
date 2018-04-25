@@ -1,6 +1,17 @@
+/* ----------------------------------------------------------------------------
+This is the header file for the Job class
+
+Developer:		Domingo Gonzales III
+Date Written:	4/8/18
+Last Updated:	4/14/18
+-------------------------------------------------------------------------------*/
+
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "Job.h"
 
+// default constructor
 Job::Job() {
 	wireType = ' ';
 	feetOfWire = 0.0;
@@ -8,6 +19,7 @@ Job::Job() {
 	laborCost = 0.0;
 }
 
+// constructor
 Job::Job(int rn, char wt, double fow, double wc, double lc) {
 	refNum = rn;
 	wireType = wt;
@@ -46,11 +58,12 @@ char Job::getWireType() {
 	cout << "\nWhat type of wire will the project require?\n(a for aluminum/c for copper) ";
 	cin >> wireType;
 
-	// verifying user's choice 
+	// loop to verify user's choice is valid, this choice will determine selection of a string later
 	while (tolower(wireType) != 'a' && tolower(wireType) != 'c') {
 		cout << "\nPlease select a valid wire type.\n(a for aluminum/c for copper) ";
 		cin >> wireType;
 	}
+	
 	return wireType;
 }
 
@@ -72,23 +85,88 @@ double Job::getLaborCost() {
 	return laborCost;
 }
 
-void Job::summaryReport() {
-	//code to extract this information from file will go here so I've entered dummy numbers
-	char wireType = 'a';
-	double costs[6] = { 100, 4.00, 8.00, 400, 800, 1200 };
+// print Summary Reports on all jobs in ProjectsFile.txt
+void Job::summaryReport(const char FileName[]) {
+	//code to extract this information from file
+	ifstream inMyStream(FileName);	// opens file
 
-	//converting char indicator for wire type into meaningful string
-	if (wireType == 'a') {
-		typeOfWire = "aluminum";
-	}
-	else {
-		typeOfWire = "copper";
+	cout << "\nSummary Report\n\n";
+
+	if (inMyStream.is_open()) {
+
+		//set character to use as a line between record displays	
+		string recBreaks = "";
+		recBreaks.assign(30, '-');
+
+		int fieldCount = 1;  //keep track of the number of fields read
+		int recordCount = 1; //keep track of the number of records read
+
+		//read the first field
+		string fieldBuffer;
+		getline(inMyStream, fieldBuffer, '#');
+
+		// while the end of the file has not been reached
+		while (!inMyStream.eof()) {
+
+			//display the field
+			switch (fieldCount) {
+
+			case 1:
+				cout << recBreaks << endl;
+				cout << "Record # " << recordCount << endl;
+				cout << "Reference Number..... " << fieldBuffer << endl;
+				break;
+			case 2:
+				// stores wireType char for conversion to string
+				wireTypeS = fieldBuffer;
+
+				// if/else statement converting char indicator for wire type into meaningful string
+				if (wireTypeS == "a" || wireTypeS == "A") {
+					typeOfWire = "Aluminum";
+				}
+				else {
+					typeOfWire = "Copper";
+				}
+
+				cout << "Type of wire......... " << typeOfWire << endl;
+				break;
+			case 3:
+				feetOfWire = stod(fieldBuffer);
+				cout << "Feet of Wire......... " << fieldBuffer << endl;
+				break;
+			case 4:
+				wireCost = stod(fieldBuffer);
+				cout << "Material Cost........ $" << fieldBuffer << endl;
+				break;
+			case 5:
+				laborCost = stod(fieldBuffer);
+				cout << "Labor Cost........... $" << fieldBuffer << endl;
+				fieldCount = 0;
+				recordCount++;
+
+				// calculate total costs
+				totalMaterialCost = feetOfWire * wireCost;
+				totalLaborCost = feetOfWire * laborCost;
+
+				//add total cost that are not stored in file to end of Summary Report print out before net record
+				cout << "\nTotal Material Cost.. $" << totalMaterialCost << endl;
+				cout << "Total Labor Cost..... $" << totalLaborCost << endl;
+				cout << "\nTotal Job Cost....... $" << (totalMaterialCost + totalLaborCost) << endl;
+
+				break;
+
+			}
+
+			//read the next field
+			getline(inMyStream, fieldBuffer, '#');
+			fieldCount++;
+
+		}
+
+		cout << recBreaks << endl;
+
+		// closes the file
+		inMyStream.close();
 	}
 
-	//printing report to console
-	cout << "\n***********************************\nProject Report:\n\n"
-		<< "You will use " << costs[0] << " feet of " << "aluminum" << " wire.\n\n"
-		<< "At a cost of $" << costs[1] << " per foot, the total cost of materials will be $" << costs[3] << ".\n"
-		<< "At a rate of $" << costs[2] << " per foot, the total cost of labor will be $" << costs[4] << ".\n"
-		<< "\nThis brings the total project cost to $" << costs[5] << ".\n\n";
 }
