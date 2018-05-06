@@ -1,9 +1,9 @@
 /* ----------------------------------------------------------------------------
-This is the header file for the Job class
+This is the source/implementation file for the Job class
 
 Developer:		Domingo Gonzales III
 Date Written:	4/8/18
-Last Updated:	4/14/18
+Last Updated:	5/6/18
 -------------------------------------------------------------------------------*/
 
 #include <iostream>
@@ -11,21 +11,16 @@ Last Updated:	4/14/18
 #include <string>
 #include "Job.h"
 
-// default constructor
-Job::Job() {
-	wireType = ' ';
-	feetOfWire = 0.0;
-	wireCost = 0.0;
-	laborCost = 0.0;
+// default constructor, now utilizing a member initializer list
+Job::Job() 
+	: wireType(' '), feetOfWire(0.0), wireCost(0.0), laborCost(0.0)
+{	
 }
 
-// constructor
-Job::Job(int rn, char wt, double fow, double wc, double lc) {
-	refNum = rn;
-	wireType = wt;
-	feetOfWire = fow;
-	wireCost = wc;
-	laborCost = lc;
+// constructor, now utilizing a member initializer list
+Job::Job(int rn, char wt, double fow, double wc, double lc) 
+	: wireType(wt), refNum(rn), feetOfWire(fow), wireCost(wc), laborCost(lc)
+{
 }
 
 void Job::setRefNum(int rn) {
